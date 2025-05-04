@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('role', ['admin', 'mentor', 'mahasiswa'])->default('mahasiswa');
             $table->text('bio')->nullable();
             $table->string('photo')->nullable();
-            $table->foreignId('skill_id')->constrained()->onDelete('cascade');
+            $table->foreignId('skill_id')->nullable()->constrained()->onDelete('cascade');
             $table->boolean('is_verified')->default(false);
             $table->string('email_notif')->nullable();
             $table->rememberToken();
