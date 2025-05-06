@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mentoring_requests', function (Blueprint $table) {
+        Schema::create('mentoring_sessions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mentor_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('mentee_id')->constrained('users')->onDelete('cascade');
-            $table->enum('status', ['pending', 'accepted', 'rejected', 'done'])->default('pending');
-            $table->dateTime('schedule_time');
-            $table->string('platform');
-            $table->text('notes')->nullable();
-            $table->string('proof_photo')->nullable();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->dateTime('scheduled_at');
+            $table->enum('status', ['upcoming', 'completed', 'cancelled'])->default('upcoming');
+            $table->string('proof_image')->nullable();
+            $table->string('group_link')->nullable();
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mentoring_requests');
+        Schema::dropIfExists('mentoring_sessions');
     }
 };
