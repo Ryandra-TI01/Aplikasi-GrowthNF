@@ -12,4 +12,8 @@ class MentoringSession extends Model
     {
         return $this->belongsTo(User::class, 'mentor_id');
     }
+    public function review()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
